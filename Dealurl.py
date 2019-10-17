@@ -39,7 +39,7 @@ def dealwith():
         if not q.empty():
             url = q.get()
             progress_count = progress_count + 1
-            #progress_write()
+            progress_write()
             try:
                 res = requests.get(url,timeout=20,headers=headers).content
                 Seturl(res,url)
@@ -48,7 +48,7 @@ def dealwith():
                 continue
 
         else:
-            #bar.update(100)
+            bar.update(100)
             break
 
 with open(sys.argv[1],"r") as f:
