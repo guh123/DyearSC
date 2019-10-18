@@ -1,17 +1,24 @@
 from selenium import webdriver
+import argparse
 from selenium.webdriver.chrome.options import Options 
 import requests
 import sys
+parser = argparse.ArgumentParser()
+parser.description="Chromedriver with xray"
+parser.add_argument("-f","--file",help="",type=str)
+parser.add_argument("-p","--port",help="",type=str)
+args = parser.parse_args()
+
 ops = Options()
 ops.add_argument("--headless")
 ops.add_argument('--no-sandbox')
 ops.add_argument('--disable-dev-shm-usage')
 ops.add_experimental_option('excludeSwitches',['enable-automation']) #防止检测window.navigator.webdriver
-ops.add_argument('--proxy-server=http://127.0.0.1:9991')
+ops.add_argument('--proxy-server=http://127.0.0.1:' + args.port )
 driver = webdriver.Chrome(chrome_options=ops)
 
 resList = []
-with open(sys.argv[1],"r") as f:
+with open(args.file,"r") as f:
     for i in f.readlines():
         try:
             res = requests.get(i.strip(" ").strip("\n")).text
