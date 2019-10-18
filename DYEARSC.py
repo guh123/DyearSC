@@ -3,8 +3,9 @@ from selenium.webdriver.chrome.options import Options
 import requests
 import sys
 ops = Options()
-#ops.add_argument("--headless")
-
+ops.add_argument("--headless")
+ops.add_argument('--no-sandbox')
+ops.add_argument('--disable-dev-shm-usage')
 ops.add_experimental_option('excludeSwitches',['enable-automation']) #防止检测window.navigator.webdriver
 ops.add_argument('--proxy-server=http://127.0.0.1:9991')
 driver = webdriver.Chrome(chrome_options=ops)
